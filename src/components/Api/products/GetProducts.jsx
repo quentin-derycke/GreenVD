@@ -1,6 +1,5 @@
 import React, {useEffect, useState } from "react";
 import axios from "axios";
-import AddUser from "../components/Api/users/AddUser";
 
 
 
@@ -12,28 +11,27 @@ import AddUser from "../components/Api/users/AddUser";
 
 
 export default function Users() {
-    const [users, setUsers] = useState([]);
+    const [products, setproducts] = useState([]);
 
     useEffect(() => {
-        axios.get("http://127.0.0.1:8000/api/users").then((data) => {
+        axios.get("http://127.0.0.1:8000/api/products").then((data) => {
           console.log(data);
-          setUsers(data?.data["hydra:member"]);
+          setproducts(data?.data["hydra:member"]);
         });
       }, []);
 
+
     return(
         <>
-        <h1> Utilisateurs </h1>
+        <h2> Liste:  </h2>
         
-        {users.map((item,i) => {
+        {products.map((item,i) => {
             return (
                 <div key={i}> 
                 <p>{item?.name}</p></div>
             );
         })}
-        
-        <AddUser />
+  
         </>
         )
 }
-
