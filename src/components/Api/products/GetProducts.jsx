@@ -6,7 +6,8 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
-
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 
 
 
@@ -23,10 +24,24 @@ export default function Users() {
 
     return(
         <>
-        <h2> Liste:  </h2>
+            <h2> Liste:  </h2>
         
+            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+    
         {products.map((item,i) => {
             return (
+              <Grid item xs={2} sm={4} md={4} key={i}>
+              <Paper
+      sx={{
+        p: 2,
+        margin: 'auto',
+        maxWidth: 500,
+        flexGrow: 1,
+        backgroundColor: (theme) =>
+          theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+      }}
+    >
+    
                 <Card sx={{ maxWidth: 345}} key={i}> 
                 {
                   (item.image.length > 0 )?
@@ -44,9 +59,11 @@ export default function Users() {
                 
                 </CardContent>
                 </Card>
+                </Paper>
+                </Grid>
             );
         })}
-  
+        </Grid>
         </>
         )
 }
