@@ -190,7 +190,7 @@ export default function MiniDrawer() {
           {/*Catalogue*/}
         <List>
           {links.map(( link, index) => (
-            <NavLink to={link.path}>
+            <NavLink to={link.path} className={({isActive, isPending}) => isActive ? "active" : isPending ? "pending" : ""}>
             <ListItem key={index} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
