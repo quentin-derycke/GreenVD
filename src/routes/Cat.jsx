@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import axios from "axios";
+import { CardMedia } from "@mui/material";
 
 /* Base URL */
 const baseURL = "http://127.0.0.1:8000/api";
@@ -65,7 +66,16 @@ const parentCategories = categories.filter(category => category.parent && catego
                 <div key={category["@id"]}>
                     <h2>{category.name}</h2>
                     <p>{category.description}</p>
-                    
+                    {category.image ? (
+                        <>
+                          <CardMedia
+                            src={"http://127.0.0.1:8000" + category.image.path}
+                            alt={category.image.alt}
+                          ></CardMedia>
+                        </>
+                      ) : (
+                        ""
+                      )}
                 </div>
             ))}
         </div>
