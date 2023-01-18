@@ -5,9 +5,16 @@ import ErrorPage from './error-page'
 import Root from './routes/Root.jsx'
 import Dash from './routes/Dash.jsx'
 import './index.css'
-import Products from './routes/Products';
+import Products from './routes/products/Products';
+import {NewProduct} from './routes/products/New';
 import Categories from './routes/Cat';
 import Users from './routes/Users';
+
+
+import { GetProducts } from './components/Api/products/GetProducts';
+import { ProductsDetails } from './routes/products/Products_Details';
+
+
 
 
 
@@ -27,7 +34,16 @@ const router = createBrowserRouter([
       }, 
       {
         path: "/products",
-        element: <Products />
+        element: <Products />,
+      
+      },  
+      {
+        path: "/products/:id",
+        element: <ProductsDetails/>
+      },
+      {
+        path:"/products/new",
+        element: <NewProduct/>
       },
       {
         path: "categories",

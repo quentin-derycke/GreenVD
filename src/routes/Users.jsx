@@ -3,7 +3,7 @@ import axios from "axios";
 import AddUser from "../components/Api/users/AddUser";
 import { GetUsers } from "../components/Api/users/GetUsers";
 import { DataGrid, GridToolbar  } from "@mui/x-data-grid";
-
+import { Box } from "@mui/system";
 export default function Users() {
 
   const [users, setUsers] = useState([]);
@@ -19,6 +19,9 @@ export default function Users() {
       .catch((error) => console.log("Error :" + error));
   }, []);
 
+  console.log(GetUsers());
+
+   // non utilisé mais serts à cibler row du data grid
   const rows = users.map((user) => (
     
       {
@@ -38,22 +41,23 @@ export default function Users() {
     <>
       <h1> Utilisateurs </h1>
 
-      <div style={{ height: 250, width: "1000px" }}>
+      <Box style={{ displa: 'flex', height: 700, width: 1400 }}>
         <DataGrid
           columns={[
-            {field: "id"},
-            { field: "username", hideable: false },
-            { field: "name" },
-            { field: "lastname" },
-            {field: "email"},
-            {field: "phone"}
+            {field: "id", headerName: "Identifiant" , width: 150},
+            { field: "name" , headerName: "Prenom" , width: 150 },
+            { field: "lastname" , headerName: 'Nom', width: 150 },
+            {field: "email" , headerName: "Mail", width: 150},
+            {field: "phoneNumber" , headerName: 'Téléphone', width: 150},
+            {field:'createdAt', headerName: "Date de création", width:150 }
           ]}
+          
           rows={users}
           components={{
             Toolbar: GridToolbar,
           }}
         />
-      </div>
+      </Box>
     </>
   );
 }
