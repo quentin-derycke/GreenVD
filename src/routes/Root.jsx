@@ -58,15 +58,17 @@ import { NavLink, Outlet } from 'react-router-dom';
     path: '/users',
     icon: <GroupsIcon />,
   },
-  {
-    name: "Products", 
-    path:"/products",
-    icon: <InventoryIcon/>
-  },
+  
   {
     name: "Categories",
     path: "/categories",
+     icon: <InventoryIcon/>
+  },
+  {
+    name: "Products", 
+    path:"/products",
     icon: <LocalOfferIcon />
+   
   }
 
  ]

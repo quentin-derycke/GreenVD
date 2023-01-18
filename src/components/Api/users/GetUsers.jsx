@@ -10,10 +10,10 @@ const instanceAxios = axios.create({
     headers: {'x-access-token': localStorage.getItem('token')}
 })
 
-export async function GetUsers() {
+export async function loader() {
     try {
-        const status = (await (await fetch(`${baseURL}/users`)).json())["hydra:member"];
-        return status;
+        return (await (await fetch(`${baseURL}/users`)).json())["hydra:member"];
+        
     } catch (error) {
         return "error";
     }

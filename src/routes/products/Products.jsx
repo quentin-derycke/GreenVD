@@ -1,17 +1,26 @@
-import AddProduct from "../../components/Api/products/AddProduct";
-import { GetProducts } from "../../components/Api/products/GetProducts";
+
+
 import { Product } from "../../components/Products/Product";
 
 import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-export default function Products() {
-  const [products, setProducts] = useState([]);
-  // Appel à l'API
-    useEffect(() => {
-        GetProducts()
-            .then(response => setProducts(response));
-    }, [])
+
+
+import { useLoaderData } from "react-router-dom";
+
+
+
+
+
+export const Products = ()  =>  {
+
+
+const products = useLoaderData();
+
+
+console.log(products);
+
+
   return (
     <>
       <h1> Products </h1>

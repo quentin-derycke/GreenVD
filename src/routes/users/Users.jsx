@@ -1,26 +1,14 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import AddUser from "../components/Api/users/AddUser";
-import { GetUsers } from "../components/Api/users/GetUsers";
+
+
+
 import { DataGrid, GridToolbar  } from "@mui/x-data-grid";
 import { Box } from "@mui/system";
+import { useLoaderData } from "react-router-dom";
 export default function Users() {
 
-  const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    /* axios.get("http://127.0.0.1:8000/api/users").then((data) => {
-        console.log(data);
-        setUsers(data?.data["hydra:member"]);
-      }); */
-  
-    GetUsers()
-      .then((usersResponse) => setUsers(usersResponse))
-      .catch((error) => console.log("Error :" + error));
-  }, []);
 
-  console.log(GetUsers());
-
+  const users = useLoaderData();
  
 
   

@@ -1,18 +1,29 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
+
 import ErrorPage from './error-page'
+
 import Root from './routes/Root.jsx'
-import Dash from './routes/Dash.jsx'
+
+import Dash from './routes/dashboard/Dash.jsx'
+
 import './index.css'
-import Products from './routes/products/Products';
+
+import {Products} from './routes/products/Products';
+import { loader as ProductsLoader} from './components/Api/products/GetProducts'
 import {NewProduct} from './routes/products/New';
-import Categories from './routes/Cat';
-import Users from './routes/Users';
-
-
-import { GetProducts } from './components/Api/products/GetProducts';
 import { ProductDetails, loader as ProductDetailsLoader } from './routes/products/Product_Detail';
+
+import Categories from './routes/categories/Cat';
+import { loader as SubLoader, SubCategories} from './routes/categories/Sub';
+import {loader as CategoriesLoader } from './components/Api/categories/GetCategories';
+
+import Users from './routes/users/Users';
+import {loader as UsersLoader} from './components/Api/users/GetUsers'
+
+
 
 
 
@@ -35,6 +46,7 @@ const router = createBrowserRouter([
         path: "/products",
         element: <Products />,
         errorElement: <ErrorPage />,
+        loader: ProductsLoader
       },  
       {
         path: "/product/:id",
@@ -51,11 +63,20 @@ const router = createBrowserRouter([
         path: "categories",
         element: <Categories />,
         errorElement: <ErrorPage />,
+        loader: CategoriesLoader
+                
+      },
+      {
+        path:"categories/:id",
+        element: <SubCategories/>,
+        errorElement: <ErrorPage />,
+        loader: SubLoader,
       },
       {
         path: "users", 
         element:<Users/>,
         errorElement: <ErrorPage />,
+        loader: UsersLoader
       },
       {
         path: '*',
