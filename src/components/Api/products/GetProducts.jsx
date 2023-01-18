@@ -12,20 +12,8 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import ButtonBase from "@mui/material/ButtonBase";
 
+const GetProducts = async () => {
+  return (await axios.get("http://127.0.0.1:8000/api/products.json")).data;
+};
 
-function GetProducts() {
-  const [products, setproducts] = useState([]);
-
-  useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/products").then((data) => {
-      console.log(data.data);
-      setproducts(data?.data["hydra:member"]);
-    });
-  }, []);
-
-  return ( products )
-    
-}
-
-
-export {GetProducts };
+export { GetProducts };

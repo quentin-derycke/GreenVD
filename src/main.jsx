@@ -12,7 +12,7 @@ import Users from './routes/Users';
 
 
 import { GetProducts } from './components/Api/products/GetProducts';
-import { ProductsDetails } from './routes/products/Products_Details';
+import { ProductDetails, loader as ProductDetailsLoader } from './routes/products/Product_Detail';
 
 
 
@@ -24,39 +24,46 @@ const router = createBrowserRouter([
      path: "/", 
     element: <Root />, 
     errorElement: <ErrorPage />,
-    children: [  
-      {
-      errorElement: <ErrorPage />,
      children: [
       {
         path: "/dashboard",
-        element: <Dash />
+        element: <Dash />,
+        errorElement: <ErrorPage />,
+
       }, 
       {
         path: "/products",
         element: <Products />,
-      
+        errorElement: <ErrorPage />,
       },  
       {
-        path: "/products/:id",
-        element: <ProductsDetails/>
+        path: "/product/:id",
+        element: <ProductDetails/>,
+        loader: ProductDetailsLoader,
+        errorElement: <ErrorPage />,
       },
       {
         path:"/products/new",
-        element: <NewProduct/>
+        element: <NewProduct/>,
+        errorElement: <ErrorPage />,
       },
       {
         path: "categories",
-        element: <Categories />
+        element: <Categories />,
+        errorElement: <ErrorPage />,
       },
       {
         path: "users", 
-        element:<Users/>
+        element:<Users/>,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: '*',
+        element: <ErrorPage />,
+        errorElement: <ErrorPage />,
       }
       
     ],
-  }
-     ],
   }
 ]);
 

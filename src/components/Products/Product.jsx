@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import ButtonBase from "@mui/material/ButtonBase";
-
+import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 
 export const Product = (props) => {
@@ -29,6 +29,7 @@ return (<Grid item xs={2} sm={4} md={4} >
     >
       <Grid container spacing={2}>
         <Grid item>
+        <Link to={`/product/${props.item.id}`}>
           <ButtonBase sx={{ width: 128, height: 128 }}>
             {props.item.image.length > 0 ? (
               <>
@@ -41,6 +42,7 @@ return (<Grid item xs={2} sm={4} md={4} >
               ""
             )}
           </ButtonBase>
+          </Link>
         </Grid>
         <Grid item xs={12} sm container>
           <Grid item xs container direction="column" spacing={2}>

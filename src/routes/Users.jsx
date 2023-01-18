@@ -21,27 +21,14 @@ export default function Users() {
 
   console.log(GetUsers());
 
-   // non utilisé mais serts à cibler row du data grid
-  const rows = users.map((user) => (
-    
-      {
-        
-        id: user.id,
-        name: user.name,
-        lastname: user.lastname,
-        email: user.email,
-        phoneNumber : user.phoneNumber
-      }
-     
-      )
-  );
+ 
+
   
 
   return (
     <>
       <h1> Utilisateurs </h1>
-
-      <Box style={{ displa: 'flex', height: 700, width: 1400 }}>
+      <Box style={{ display: 'flex', height: 700, width: 1400 }}>
         <DataGrid
           columns={[
             {field: "id", headerName: "Identifiant" , width: 150},
@@ -49,7 +36,8 @@ export default function Users() {
             { field: "lastname" , headerName: 'Nom', width: 150 },
             {field: "email" , headerName: "Mail", width: 150},
             {field: "phoneNumber" , headerName: 'Téléphone', width: 150},
-            {field:'createdAt', headerName: "Date de création", width:150 }
+            {field:'createdAt', headerName: "Date de création", width:150 },
+            
           ]}
           
           rows={users}
