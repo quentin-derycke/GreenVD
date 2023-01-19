@@ -1,25 +1,45 @@
-
-
+import { useEffect, useState } from "react";
 import { Product } from "../../components/Products/Product";
 
 import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
+
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 
-import { useLoaderData } from "react-router-dom";
+export const Products = () => {
+  const { result, pageParam } = useLoaderData();
+  const [page, setPage] = useState(pageParam);
+  const navigate = useNavigate();
+ 
+ console.log(result);
+  const products = result["hydra:member"];
 
 
 
 
+  useEffect(() => {
+    const lastPage = result['hydra:view']['hydra:last'];
+    
+     // capture du numero de la derniere page
+    const re = /\/api\/products\?page=(\d+)/;
+    let capture = re.exec(lastPage)
+    let max_page = capture[1];
+  
+    if (page <= 0) {
+       setPage(1);
+       return;
+    } 
+    else if (page>max_page) {
+      setPage(max_page)
+    }
+    
 
-export const Products = ()  =>  {
+    navigate(`/products?page=${page}`);
+  }, [page]);
 
-
-const products = useLoaderData();
-
-
-console.log(products);
-
+  console.log(products);
 
   return (
     <>
@@ -41,7 +61,24 @@ console.log(products);
           })}
         </Grid>
       </>
-      
+
+      <Button
+        variant="contained"
+        onClick={() => {
+          setPage(parseInt(page) + 1);
+        }}
+      >
+        Suivant
+      </Button>
+
+      <Button
+        variant="contained"
+        onClick={() => {
+          setPage(page - 1);
+        }}
+      >
+        Precedent
+      </Button>
     </>
   );
-}
+};

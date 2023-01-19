@@ -1,7 +1,9 @@
 
-import { CardMedia } from "@mui/material";
+import { CardContent, CardMedia, Typography } from "@mui/material";
+import {Card } from '@mui/material'
+import Grid from '@mui/material/Grid'; 
 import { useLoaderData } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 
 
 
@@ -21,30 +23,42 @@ const parentCategories = categories.filter(category => category.parent && catego
         <>
      <h1> Categories </h1>
 
-     <div>
+     
         {console.log(parentCategories)}
-        <div>
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
             {parentCategories.map(category => (
-               
-                <div key={category["@id"]}>
-                    <h2>{category.name}</h2>
-                    <p>{category.description}</p>
-                    {category.image ? (
+
+              <Grid item xs={6}>
+               <Card sx={{maxWidth: 345 }} key={category["@id"]}>   
+               <Link to={`/categories/${category.id}`}>
+               {category.Image ? (
+                
                         <>
+                     
                           <CardMedia
-                            src={"http://127.0.0.1:8000" + category.image.path}
-                            alt={category.image.alt}
+                          component="img"
+                          height='140'
+                            image={"http://127.0.0.1:8000" + category.Image.path}
+                            alt={category.Image.alt}
                           ></CardMedia>
+                         
                         </>
                       ) : (
                         ""
                       )}
-                </div>
+                      <CardContent>
+                        <Typography gutterBottom="h5" component='div'>
+                          {category.name}
+                        </Typography>
+                        
+                      </CardContent>
+                </Link>
+                </Card>
+               </Grid>
             ))}
-        </div>
+        </Grid>
     
- </div>
-
+ 
  </>
  
     )

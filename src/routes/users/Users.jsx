@@ -16,8 +16,8 @@ export default function Users() {
   return (
     <>
       <h1> Utilisateurs </h1>
-      <Box style={{ display: 'flex', height: 700, width: 1400 }}>
-        <DataGrid
+      <Box style={{ width: 1200 }}>
+        <DataGrid autoHeight
           columns={[
             {field: "id", headerName: "Identifiant" , width: 150},
             { field: "name" , headerName: "Prenom" , width: 150 },

@@ -36,6 +36,7 @@ import { NavLink, Outlet } from 'react-router-dom';
  import InventoryIcon from '@mui/icons-material/Inventory';
  import GradingIcon from '@mui/icons-material/Grading';
  import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import { Container } from '@mui/system';
 
 
  
@@ -249,10 +250,12 @@ export default function MiniDrawer() {
           ))}
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+     
         <DrawerHeader />
+        <Container>
 <Outlet />
-      </Box>
+</Container>
+     
      
     </Box>
     </ThemeProvider>
