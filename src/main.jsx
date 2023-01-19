@@ -22,9 +22,9 @@ import {loader as CategoriesLoader } from './components/Api/categories/GetCatego
 
 import Users from './routes/users/Users';
 import {loader as UsersLoader} from './components/Api/users/GetUsers'
+import Order from './routes/orders/order';
 
-
-
+import Suppliers from './routes/suppliers/Supp';
 
 
 
@@ -77,6 +77,18 @@ const router = createBrowserRouter([
         element:<Users/>,
         errorElement: <ErrorPage />,
         loader: UsersLoader
+      },
+      {
+        path: "orders", 
+        element:<Order/>,
+        errorElement: <ErrorPage />,
+        
+      },
+      {
+        path: "suppliers", 
+        element:<Suppliers/>,
+        errorElement: <ErrorPage />,
+        
       },
       {
         path: '*',
