@@ -32,10 +32,15 @@ import { NavLink, Outlet } from 'react-router-dom';
  import DashboardIcon from '@mui/icons-material/Dashboard';
  import WorkIcon from '@mui/icons-material/Work';
  import StoreIcon from '@mui/icons-material/Store';
- import ListIcon from '@mui/icons-material/List';
+
  import InventoryIcon from '@mui/icons-material/Inventory';
- import GradingIcon from '@mui/icons-material/Grading';
+
  import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+ import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
+
+ import LocationOnIcon from '@mui/icons-material/LocationOn';
+
+
 import { Container } from '@mui/system';
 
 
@@ -53,12 +58,9 @@ import { Container } from '@mui/system';
 {
      name : "Dashboard",
     path: "/dashboard", 
-    icon: <DashboardIcon/> },
-{
-    name: 'Utilisateurs',
-    path: '/users',
-    icon: <GroupsIcon />,
+    icon: <DashboardIcon/> 
   },
+
   
   {
     name: "Categories",
@@ -66,15 +68,43 @@ import { Container } from '@mui/system';
      icon: <InventoryIcon/>
   },
   {
-    name: "Products", 
+    name: "Produits", 
     path:"/products",
     icon: <LocalOfferIcon />
    
-  }
+  },
+  {
+    name: "Commandes",
+    path:'/orders',
+    icon: <ShoppingCartCheckoutIcon />
+  },
+  {
+    name: "Fournisseurs",
+    path:'/suppliers',
+    icon: <StoreIcon />
 
- ]
+  },
 
+ ];
 
+ const links2 = [
+  {
+    name: 'Utilisateurs',
+    path: '/users',
+    icon: <GroupsIcon />,
+  },
+   {
+  name: "Adresses",
+  path:"/adresses",
+  icon: <LocationOnIcon />
+},
+  {
+    name:"Employés",
+    path: "/employe",
+    icon: <WorkIcon /> 
+  }, 
+ 
+]
 
 
   // Drawer de base 
@@ -226,8 +256,9 @@ export default function MiniDrawer() {
         </List>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+          {links2.map((link, index) => (
+            <NavLink  style= {{ color:'white'}}  to={link.path} key={"link" + index} className={({isActive, isPending}) => isActive ? "active" : isPending ? "pending" : ""}>
+            <ListItem key={index} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -242,11 +273,12 @@ export default function MiniDrawer() {
                     justifyContent: 'center',
                   }}
                 >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {link.icon}
                 </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText primary={link.name} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
+            </NavLink>
           ))}
         </List>
       </Drawer>
