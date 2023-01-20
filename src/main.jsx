@@ -22,10 +22,11 @@ import {loader as CategoriesLoader } from './components/Api/categories/GetCatego
 
 import Users from './routes/users/Users';
 import {loader as UsersLoader} from './components/Api/users/GetUsers'
-import Order from './routes/orders/order';
-
+import Order from './routes/orders/Order';
+import{loader as OrderLoader} from './components/Api/orders/orders'
 import Suppliers from './routes/suppliers/Supp';
-
+import Workers from './routes/employe/Workers';
+import Addresses from './routes/addresses/Addresses';
 
 
 
@@ -82,21 +83,36 @@ const router = createBrowserRouter([
         path: "orders", 
         element:<Order/>,
         errorElement: <ErrorPage />,
+        loader:  OrderLoader
+
+        },
         
-      },
+      
       {
-        path: "suppliers", 
+        path: "/suppliers", 
         element:<Suppliers/>,
         errorElement: <ErrorPage />,
         
       },
       {
+        path: "/workers",
+        element: <Workers />,
+        errorElement: <ErrorPage />,
+
+      },
+   
+      {
         path: '*',
         element: <ErrorPage />,
         errorElement: <ErrorPage />,
-      }
+      },
+      {
+        path: "/addresses",
+        element: <Addresses/>,
+        errorElement: <ErrorPage / >
+      },
       
-    ],
+    ]
   }
 ]);
 

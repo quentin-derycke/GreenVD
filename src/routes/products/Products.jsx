@@ -12,8 +12,12 @@ export const Products = () => {
   const { result, pageParam } = useLoaderData();
   const [page, setPage] = useState(pageParam);
   const navigate = useNavigate();
+
+
+
+
  
- console.log(result);
+
   const products = result["hydra:member"];
 
 
@@ -46,6 +50,7 @@ export const Products = () => {
       <h1> Products </h1>
       {/* <GetProducts /> */}
       <>
+      <input placeholder="search" onChange={(e) => searchItems(e.target.value)} / > 
         <Link component="button" variant="body2" to="/products/new">
           Add New pute
         </Link>
@@ -62,14 +67,6 @@ export const Products = () => {
         </Grid>
       </>
 
-      <Button
-        variant="contained"
-        onClick={() => {
-          setPage(parseInt(page) + 1);
-        }}
-      >
-        Suivant
-      </Button>
 
       <Button
         variant="contained"
@@ -78,6 +75,15 @@ export const Products = () => {
         }}
       >
         Precedent
+      </Button>
+
+      <Button
+        variant="contained"
+        onClick={() => {
+          setPage(parseInt(page) + 1);
+        }}
+      >
+        Suivant
       </Button>
     </>
   );

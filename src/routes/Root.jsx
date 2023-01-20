@@ -95,12 +95,12 @@ import { Container } from '@mui/system';
   },
    {
   name: "Adresses",
-  path:"/adresses",
+  path:"/addresses",
   icon: <LocationOnIcon />
 },
   {
     name:"Employés",
-    path: "/employe",
+    path: "/workers",
     icon: <WorkIcon /> 
   }, 
  
