@@ -4,7 +4,7 @@ import { Product } from "../../components/Products/Product";
 import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
-
+import { ButtonGroup } from "@mui/material";
 import { useLoaderData, useNavigate } from "react-router-dom";
 
 
@@ -58,16 +58,17 @@ export const Products = () => {
 
         <Grid
           container
-          rowSpacing={{ xs: 2, md: 3 }}
-          columns={{ xs: 4, sm: 8, md: 12 }}
+          spacing={{ xs: 2, md: 3 }} columns={{ xs: 2, sm: 8, md: 12 }}
         >
           {products.map((item, i) => {
             return <Product item={item} key={i} />;
           })}
         </Grid>
+        
+
       </>
 
-
+      <ButtonGroup variant="outlined" aria-label="outlined button group">
       <Button
         variant="contained"
         onClick={() => {
@@ -85,6 +86,8 @@ export const Products = () => {
       >
         Suivant
       </Button>
+      </ButtonGroup>
+
     </>
   );
 };

@@ -8,7 +8,30 @@ export default function Orders() {
 
 
     console.log(orders)
-    console.log(orders[0].id);
+
+    const rows = orders.map(order => {
+      return {
+        id: order.id,
+        address: order.address.houseNumber + ' '+ order.address.street + ' '+  order.address.zipcode + ' ' + order.address.city ,
+        createdAt: order.createdAt,
+        status: order.status,
+        items: order.items.length,
+        updatedAt: order.updatedAt,
+        user: order.user.name + ' ' + order.user.lastname,
+        phoneNumber: order.user.phoneNumber
+      };
+    });
+    
+    const columns = [
+      { field: 'id', headerName: 'Order ID', width: 150 },
+      { field: 'user', headerName: 'User', width: 150 },
+      { field: 'phoneNumber', headerName: 'Phone number', width: 150 },
+      { field: 'createdAt', headerName: 'Date Created', width: 150 },
+      { field: 'updatedAt', headerName: 'Last Update', width: 150 },
+      { field: 'address', headerName: 'Address', width: 150 },
+      { field: 'items', headerName: 'Items Quantity', width: 150 },
+      { field: 'status', headerName: 'Status', width: 150 },
+    ];
 
 
     return(
@@ -16,19 +39,10 @@ export default function Orders() {
         <>
         <h1>Commandes</h1>
 
-          <Box style={{ width: 1200 }}>
-        <DataGrid autoHeight
-          columns={[
-            {field: "id", headerName: "Identifiant" , width: 150},
-            { field: "user" , headerName: "user Name" , width: 150 },
-            { field: "items" , headerName: 'Nom', width: 150 },
-            {field: "email" , headerName: "Mail", width: 150},
-            {field: "phoneNumber" , headerName: 'Téléphone', width: 150},
-            {field:'createdAt', headerName: "Date de création", width:150 },
-            
-          ]}
-          
-          rows={orders}
+          <Box  style={{ width: 1200 }}>
+        <DataGrid  autoHeight
+          columns={columns}
+          rows={rows}
           components={{
             Toolbar: GridToolbar,
           }}

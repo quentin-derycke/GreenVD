@@ -25,9 +25,11 @@ import {loader as UsersLoader} from './components/Api/users/GetUsers'
 import Order from './routes/orders/Order';
 import{loader as OrderLoader} from './components/Api/orders/orders'
 import Suppliers from './routes/suppliers/Supp';
+import {loader as SuppliersLoader} from './components/Api/suppliers/suppliers'
 import Workers from './routes/employe/Workers';
 import Addresses from './routes/addresses/Addresses';
-
+import {loader as AddressLoader} from './components/Api/addresses/addresses'
+ 
 
 
 const router = createBrowserRouter([
@@ -92,7 +94,7 @@ const router = createBrowserRouter([
         path: "/suppliers", 
         element:<Suppliers/>,
         errorElement: <ErrorPage />,
-        
+        loader: SuppliersLoader
       },
       {
         path: "/workers",
@@ -109,7 +111,8 @@ const router = createBrowserRouter([
       {
         path: "/addresses",
         element: <Addresses/>,
-        errorElement: <ErrorPage / >
+        loader: AddressLoader,
+        errorElement: <ErrorPage / >,
       },
       
     ]

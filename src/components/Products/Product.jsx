@@ -62,6 +62,9 @@ return (<Grid item xs={2} sm={4} md={4} >
                 <Typography variant="body2" color="text.secondary">
                 {props.item.categoryId.name}
               </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+          {props.item.supplier.name}
+        </Typography>
               </Grid>
 
             </Grid>

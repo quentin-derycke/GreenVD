@@ -284,7 +284,8 @@ export default function MiniDrawer() {
       </Drawer>
      
         <DrawerHeader />
-        <Container>
+        <Container fixed>
+
 <Outlet />
 </Container>
      
