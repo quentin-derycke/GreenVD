@@ -13,107 +13,102 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
- // Router
+// Router
 import { NavLink, Outlet } from 'react-router-dom';
 
 
- // Icons Import 
+// Icons Import 
 
- import IconButton from '@mui/material/IconButton';
- import MenuIcon from '@mui/icons-material/Menu';
- import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
- import ChevronRightIcon from '@mui/icons-material/ChevronRight';
- import ListItemIcon from '@mui/material/ListItemIcon';
- import InboxIcon from '@mui/icons-material/MoveToInbox';
- import MailIcon from '@mui/icons-material/Mail';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
 
- import HomeIcon from '@mui/icons-material/Home';
- import GroupsIcon from '@mui/icons-material/Groups';
- import DashboardIcon from '@mui/icons-material/Dashboard';
- import WorkIcon from '@mui/icons-material/Work';
- import StoreIcon from '@mui/icons-material/Store';
+import HomeIcon from '@mui/icons-material/Home';
+import GroupsIcon from '@mui/icons-material/Groups';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import WorkIcon from '@mui/icons-material/Work';
+import StoreIcon from '@mui/icons-material/Store';
 
- import InventoryIcon from '@mui/icons-material/Inventory';
+import InventoryIcon from '@mui/icons-material/Inventory';
 
- import LocalOfferIcon from '@mui/icons-material/LocalOffer';
- import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 
- import LocationOnIcon from '@mui/icons-material/LocationOn';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 
 import { Container } from '@mui/system';
 
 
- 
- 
- 
- 
- 
- 
- 
- // Navlink : 
 
- const links = [
 
-{
-     name : "Dashboard",
-    path: "/dashboard", 
-    icon: <DashboardIcon/> 
+
+
+
+
+
+// Navlink : 
+
+const links = [
+
+  {
+    name: "Dashboard",
+    path: "/dashboard",
+    icon: <DashboardIcon />
   },
 
-  
+
   {
     name: "Categories",
     path: "/categories",
-     icon: <InventoryIcon/>
+    icon: <InventoryIcon />
   },
   {
-    name: "Produits", 
-    path:"/products",
+    name: "Produits",
+    path: "/products",
     icon: <LocalOfferIcon />
-   
+
   },
   {
     name: "Commandes",
-    path:'/orders',
+    path: '/orders',
     icon: <ShoppingCartCheckoutIcon />
   },
   {
     name: "Fournisseurs",
-    path:'/suppliers',
+    path: '/suppliers',
     icon: <StoreIcon />
 
   },
 
- ];
+];
 
- const links2 = [
+const links2 = [
   {
     name: 'Utilisateurs',
     path: '/users',
     icon: <GroupsIcon />,
   },
-   {
-  name: "Adresses",
-  path:"/addresses",
-  icon: <LocationOnIcon />
-},
   {
-    name:"Employés",
-    path: "/workers",
-    icon: <WorkIcon /> 
-  }, 
- 
+    name: "Adresses",
+    path: "/addresses",
+    icon: <LocationOnIcon />
+  },
+
 ]
 
 
-  // Drawer de base 
+// Drawer de base 
 const drawerWidth = 240;
 const darkTheme = createTheme({
-    palette: {
-      mode: 'dark',
-    },
-  });
+  palette: {
+    mode: 'dark',
+  },
+});
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -196,102 +191,102 @@ export default function MiniDrawer() {
 
 
   return (
-    <ThemeProvider theme={darkTheme}>  
-    
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{
-              marginRight: 5,
-              ...(open && { display: 'none' }),
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-           Green Desk Village
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-      
+    <ThemeProvider theme={darkTheme}>
+
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <AppBar position="fixed" open={open}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{
+                marginRight: 5,
+                ...(open && { display: 'none' }),
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap component="div">
+              Green Desk Village
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Drawer variant="permanent" open={open}>
+          <DrawerHeader>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            </IconButton>
+          </DrawerHeader>
+          <Divider />
+
           {/*Catalogue*/}
-        <List>
-          {links.map(( link, index) => (
-            <NavLink  style= {{ color:'white'}}  to={link.path} key={"link" + index} className={({isActive, isPending}) => isActive ? "active" : isPending ? "pending" : ""}>
-            <ListItem  disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {link.icon}
-                </ListItemIcon>
-                <ListItemText primary={link.name} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-        </NavLink>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {links2.map((link, index) => (
-            <NavLink  style= {{ color:'white'}}  to={link.path} key={"link" + index} className={({isActive, isPending}) => isActive ? "active" : isPending ? "pending" : ""}>
-            <ListItem key={index} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {link.icon}
-                </ListItemIcon>
-                <ListItemText primary={link.name} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-            </NavLink>
-          ))}
-        </List>
-      </Drawer>
-     
+          <List>
+            {links.map((link, index) => (
+              <NavLink style={{ color: 'white' }} to={link.path} key={"link" + index} className={({ isActive, isPending }) => isActive ? "active" : isPending ? "pending" : ""}>
+                <ListItem disablePadding sx={{ display: 'block' }}>
+                  <ListItemButton
+                    sx={{
+                      minHeight: 48,
+                      justifyContent: open ? 'initial' : 'center',
+                      px: 2.5,
+                    }}
+                  >
+                    <ListItemIcon
+                      sx={{
+                        minWidth: 0,
+                        mr: open ? 3 : 'auto',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      {link.icon}
+                    </ListItemIcon>
+                    <ListItemText primary={link.name} sx={{ opacity: open ? 1 : 0 }} />
+                  </ListItemButton>
+                </ListItem>
+              </NavLink>
+            ))}
+          </List>
+          <Divider />
+          <List>
+            {links2.map((link, index) => (
+              <NavLink style={{ color: 'white' }} to={link.path} key={"link" + index} className={({ isActive, isPending }) => isActive ? "active" : isPending ? "pending" : ""}>
+                <ListItem key={index} disablePadding sx={{ display: 'block' }}>
+                  <ListItemButton
+                    sx={{
+                      minHeight: 48,
+                      justifyContent: open ? 'initial' : 'center',
+                      px: 2.5,
+                    }}
+                  >
+                    <ListItemIcon
+                      sx={{
+                        minWidth: 0,
+                        mr: open ? 3 : 'auto',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      {link.icon}
+                    </ListItemIcon>
+                    <ListItemText primary={link.name} sx={{ opacity: open ? 1 : 0 }} />
+                  </ListItemButton>
+                </ListItem>
+              </NavLink>
+            ))}
+          </List>
+        </Drawer>
+
         <DrawerHeader />
         <Container fixed>
 
-<Outlet />
-</Container>
-     
-     
-    </Box>
+          <Outlet />
+        </Container>
+
+
+      </Box>
     </ThemeProvider>
-    
+
   );
 }

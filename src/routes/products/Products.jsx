@@ -16,7 +16,7 @@ export const Products = () => {
 
 
 
- 
+
 
   const products = result["hydra:member"];
 
@@ -25,20 +25,20 @@ export const Products = () => {
 
   useEffect(() => {
     const lastPage = result['hydra:view']['hydra:last'];
-    
-     // capture du numero de la derniere page
+
+    // capture du numero de la derniere page
     const re = /\/api\/products\?page=(\d+)/;
     let capture = re.exec(lastPage)
     let max_page = capture[1];
-  
+
     if (page <= 0) {
-       setPage(1);
-       return;
-    } 
-    else if (page>max_page) {
+      setPage(1);
+      return;
+    }
+    else if (page > max_page) {
       setPage(max_page)
     }
-    
+
 
     navigate(`/products?page=${page}`);
   }, [page]);
@@ -50,9 +50,9 @@ export const Products = () => {
       <h1> Products </h1>
       {/* <GetProducts /> */}
       <>
-      <input placeholder="search" onChange={(e) => searchItems(e.target.value)} / > 
+        <input placeholder="search" onChange={(e) => searchItems(e.target.value)} />
         <Link component="button" variant="body2" to="/products/new">
-          Add New pute
+          Add New
         </Link>
         <h2> Liste: </h2>
 
@@ -64,28 +64,28 @@ export const Products = () => {
             return <Product item={item} key={i} />;
           })}
         </Grid>
-        
+
 
       </>
 
       <ButtonGroup variant="outlined" aria-label="outlined button group">
-      <Button
-        variant="contained"
-        onClick={() => {
-          setPage(page - 1);
-        }}
-      >
-        Precedent
-      </Button>
+        <Button
+          variant="contained"
+          onClick={() => {
+            setPage(page - 1);
+          }}
+        >
+          Precedent
+        </Button>
 
-      <Button
-        variant="contained"
-        onClick={() => {
-          setPage(parseInt(page) + 1);
-        }}
-      >
-        Suivant
-      </Button>
+        <Button
+          variant="contained"
+          onClick={() => {
+            setPage(parseInt(page) + 1);
+          }}
+        >
+          Suivant
+        </Button>
       </ButtonGroup>
 
     </>

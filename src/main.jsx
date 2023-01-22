@@ -11,55 +11,57 @@ import Dash from './routes/dashboard/Dash.jsx'
 
 import './index.css'
 
-import {Products} from './routes/products/Products';
-import { loader as ProductsLoader} from './components/Api/products/GetProducts'
-import {NewProduct} from './routes/products/New';
+import { Products } from './routes/products/Products';
+import { loader as ProductsLoader } from './components/Api/products/GetProducts'
+import { NewProduct } from './routes/products/New';
 import { ProductDetails, loader as ProductDetailsLoader } from './routes/products/Product_Detail';
-
 import Categories from './routes/categories/Cat';
-import { loader as SubLoader, SubCategories} from './routes/categories/Sub';
-import {loader as CategoriesLoader } from './components/Api/categories/GetCategories';
+import { loader as SubLoader, SubCategories } from './routes/categories/Sub';
+import { loader as CategoriesLoader } from './components/Api/categories/GetCategories';
 
 import Users from './routes/users/Users';
-import {loader as UsersLoader} from './components/Api/users/GetUsers'
+import { loader as UsersLoader } from './components/Api/users/GetUsers'
 import Order from './routes/orders/Order';
-import{loader as OrderLoader} from './components/Api/orders/orders'
+import { loader as OrderLoader } from './components/Api/orders/orders'
 import Suppliers from './routes/suppliers/Supp';
-import {loader as SuppliersLoader} from './components/Api/suppliers/suppliers'
+import { loader as SuppliersLoader } from './components/Api/suppliers/suppliers'
 import Workers from './routes/employe/Workers';
 import Addresses from './routes/addresses/Addresses';
-import {loader as AddressLoader} from './components/Api/addresses/addresses'
- 
+import { loader as AddressLoader } from './components/Api/addresses/addresses'
+
 
 
 const router = createBrowserRouter([
 
   {
-     path: "/", 
-    element: <Root />, 
+    path: "/",
+    element: <Root />,
     errorElement: <ErrorPage />,
-     children: [
+    children: [
       {
         path: "/dashboard",
         element: <Dash />,
         errorElement: <ErrorPage />,
 
-      }, 
+      },
       {
         path: "/products",
         element: <Products />,
         errorElement: <ErrorPage />,
         loader: ProductsLoader
-      },  
-      {
-        path: "/product/:id",
-        element: <ProductDetails/>,
-        errorElement: <ErrorPage />,
-        loader: ProductDetailsLoader,
       },
       {
-        path:"/products/new",
-        element: <NewProduct/>,
+        path: "/product/:id",
+        element: <ProductDetails />,
+        errorElement: <ErrorPage />,
+        loader: ProductDetailsLoader,
+
+      },
+
+
+      {
+        path: "/products/new",
+        element: <NewProduct />,
         errorElement: <ErrorPage />,
       },
       {
@@ -67,32 +69,32 @@ const router = createBrowserRouter([
         element: <Categories />,
         errorElement: <ErrorPage />,
         loader: CategoriesLoader
-                
+
       },
       {
-        path:"categories/:id",
-        element: <SubCategories/>,
+        path: "categories/:id",
+        element: <SubCategories />,
         errorElement: <ErrorPage />,
         loader: SubLoader,
       },
       {
-        path: "users", 
-        element:<Users/>,
+        path: "users",
+        element: <Users />,
         errorElement: <ErrorPage />,
         loader: UsersLoader
       },
       {
-        path: "orders", 
-        element:<Order/>,
+        path: "orders",
+        element: <Order />,
         errorElement: <ErrorPage />,
-        loader:  OrderLoader
+        loader: OrderLoader
 
-        },
-        
-      
+      },
+
+
       {
-        path: "/suppliers", 
-        element:<Suppliers/>,
+        path: "/suppliers",
+        element: <Suppliers />,
         errorElement: <ErrorPage />,
         loader: SuppliersLoader
       },
@@ -102,7 +104,7 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
 
       },
-   
+
       {
         path: '*',
         element: <ErrorPage />,
@@ -110,11 +112,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/addresses",
-        element: <Addresses/>,
+        element: <Addresses />,
         loader: AddressLoader,
-        errorElement: <ErrorPage / >,
+        errorElement: <ErrorPage />,
       },
-      
+
     ]
   }
 ]);
