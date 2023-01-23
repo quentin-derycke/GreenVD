@@ -1,5 +1,7 @@
 import { redirect, useLoaderData, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 import axios from "axios";
 /* Base URL */
@@ -12,7 +14,6 @@ const instanceAxios = axios.create({
   headers: { "x-access-token": localStorage.getItem("token") },
 });
 
-
 export async function updateProduct(productId, productData) {
   try {
     let status = {};
@@ -21,6 +22,8 @@ export async function updateProduct(productId, productData) {
       categoryId: productData?.categoryId,
       reference: productData?.reference,
       price: productData?.price,
+      supplier: productData?.supplierId,
+      stock: productData?.stock,
     };
 
     await instanceAxios
@@ -38,53 +41,78 @@ export async function updateProduct(productId, productData) {
 }
 
 export async function getCategory() {
-    try {
-        let status = {};
-        await instanceAxios.get(`${baseURL}/categories/`)
-            .then(response => {
-                status = response;
-            }).catch(error => {
-                status = error;
-            });
-        return status;
-    } catch (error) {
-        console.log(error);
-    }
+  try {
+    let status = {};
+    await instanceAxios
+      .get(`${baseURL}/categories/`)
+      .then((response) => {
+        status = response;
+      })
+      .catch((error) => {
+        status = error;
+      });
+    return status;
+  } catch (error) {
+    console.log(error);
+  }
 }
+
+
+export async function getSuppliers() {
+  try {
+    let status = {};
+    await instanceAxios
+      .get(`${baseURL}/suppliers/`)
+      .then((response) => {
+        status = response;
+      })
+      .catch((error) => {
+        status = error;
+      });
+    return status;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+
 export const loader = async ({ params }) => {
-    return (await axios.get(`http://127.0.0.1:8000/api/products/${params.id}.json`)).data;
-
-}
-
-
+  return (
+    await axios.get(`http://127.0.0.1:8000/api/products/${params.id}.json`)
+  ).data;
+};
 
 export const ProductDetails = () => {
-     
-      const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState([]);
 
-    useEffect(() => {
-        getCategory()
-            .then(res => setCategories(res.data["hydra:member"]))
-    }, [])
+  useEffect(() => {
+    getCategory().then((res) => setCategories(res.data["hydra:member"]));
+  }, []);
 
-const {id} = useParams();
 
-    const[ product, setProduct] = useState(useLoaderData());
+  const [suppliers, setsuppliers] = useState([]);
 
-    
+  useEffect(() => {
+    getSuppliers().then((res) => setsuppliers(res.data["hydra:member"]));
+  }, []);
+
+
+
+  const { id } = useParams();
+
+  const [product, setProduct] = useState(useLoaderData());
 
   const handleChange = (e) => {
     e.preventDefault();
 
     setProduct({
-      ...product, 
+      ...product,
       [e.target.name]: e.target.value,
     });
-
   };
 
-
-const submitForm = (e) => {
+  const submitForm = (e) => {
     e.preventDefault();
 
     console.log("----------------------------------------");
@@ -92,43 +120,86 @@ const submitForm = (e) => {
     console.log("----------------------------------------");
 
     updateProduct(id, product).then((res) => {
-        
       console.log(res);
       console.log(res.data);
-      redirect('/products')
+      redirect("/products");
     });
-   
   };
-    return ( 
+  return (
     <>
-    <h1> {product.name}</h1>
-    
+      <h1> {product.name}</h1>
 
       <p>Update Products</p>
-      <div>
+      <Box
+      sx={{
+        '& .MuiTextField-root': { m: 1, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
         <form onSubmit={submitForm}>
-          <label>
-            Product Name:
-            <input type="text" name="name" value={product.name} onChange={handleChange} />
-          </label>
-          <label>
-            Product category_id:
-            <select name="categoryId" onChange={handleChange}>
-                            <option value="">Select a category</option>
-                            {categories.map(category => <option key={category.id} value={`/api/categories/${category.id}}`}>{category.name}</option>)}
-                        </select>
-                    </label>
-          <label>
-            Product reference:
-            <input type="text" name="reference" value={product.reference} onChange={handleChange} />
-          </label>
-          <label>
-            Product price:
-            <input type="text" name="price" value={product.price} onChange={handleChange} />
-          </label>
+          
+            <TextField  id="outlined-basic" label="Name"
+              type="text"
+              name="name"
+              required
+              value={product.name}
+              onChange={handleChange}
+            />
+         
+           
+            <TextField name="categoryId" defaultValue={product.categoryId.name}   SelectProps={{
+            native: true,
+          }} select onChange={handleChange}>
+              {categories.map((category) => (
+                <option
+                  key={category.id}
+                  value={`/api/categories/${category.id}`}
+                >
+                  {category.name}
+                </option>
+              ))}
+            </TextField>
+        
+        
+            <TextField  id="outlined-basic" label="reference"
+              type="text"
+              name="reference"
+              value={product.reference}
+              onChange={handleChange}
+            />
+      
+               
+      <TextField name="supplierId"  defaultValue={product.supplierId.name}   SelectProps={{
+            native: true,
+          }} select onChange={handleChange}>
+              
+              {suppliers.map((supplier) => (
+                <option
+                  key={supplier.id}
+                  value={`/api/suppliers/${supplier.id}`}
+                >
+                  {supplier.name}
+                </option>
+              ))}
+            </TextField>
+        
+            
+            <TextField  id="outlined-basic" label="price"
+              type="text"
+              name="price"
+              defaultValue={product.price}
+              onChange={handleChange}
+            />
+        
+            <TextField  id="outlined-basic" label="Stock" type="number" name="stock" onChange={handleChange}   InputLabelProps={{
+            shrink: true,
+          }}
+            defaultValue={product.stock}/>
+         
           <button type="submit">Update</button>
         </form>
-      </div>
-
-    </>);
-}
+      </Box>
+    </>
+  );
+};

@@ -1,4 +1,5 @@
-import Chart from 'chart.js/auto'
+
+import { LineChart } from '../../components/Charts/chart'
 
 export default function Dash() 
 {
@@ -7,7 +8,7 @@ export default function Dash()
 
                 <h1 >Dashboard</h1>
     
-   
+    <LineChart/>
     </>
                 )
 }
