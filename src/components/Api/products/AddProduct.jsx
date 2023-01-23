@@ -21,6 +21,7 @@ export async function createProduct(productData) {
       categoryId: productData?.categoryId,
       reference: productData?.reference,
       price: productData?.price,
+      supplier: productData?.supplier
     };
     console.log(axiosData);
 
@@ -61,6 +62,7 @@ export default function AddProduct() {
     categoryId: "",
     reference: "",
     price: "",
+    supplier: ""
   });
 
   const [categories, setCategories] = useState([]);
@@ -112,6 +114,11 @@ export default function AddProduct() {
             Product reference:
             <input type="text" name="reference" onChange={handleChange} />
           </label>
+          <label>
+            Product supplier:
+            <input type="text" name="supplier" onChange={handleChange} />
+          </label>
+         
           <label>
             Product price:
             <input type="text" name="price" onChange={handleChange} />

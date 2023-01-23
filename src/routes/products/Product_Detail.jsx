@@ -1,4 +1,4 @@
-import { useLoaderData, useParams } from "react-router-dom";
+import { redirect, useLoaderData, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 
 import axios from "axios";
@@ -71,7 +71,7 @@ const {id} = useParams();
 
     const[ product, setProduct] = useState(useLoaderData());
 
-    console.log(product);
+    
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -80,6 +80,7 @@ const {id} = useParams();
       ...product, 
       [e.target.name]: e.target.value,
     });
+
   };
 
 
@@ -94,7 +95,9 @@ const submitForm = (e) => {
         
       console.log(res);
       console.log(res.data);
+      redirect('/products')
     });
+   
   };
     return ( 
     <>

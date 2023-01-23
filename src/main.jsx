@@ -1,38 +1,39 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from "react";
+import ReactDOM from "react-dom/client";
 
-import { createBrowserRouter, RouterProvider, } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import ErrorPage from './error-page'
+import ErrorPage from "./error-page";
 
-import Root from './routes/Root.jsx'
+import Root from "./routes/Root.jsx";
 
-import Dash from './routes/dashboard/Dash.jsx'
+import Dash from "./routes/dashboard/Dash.jsx";
 
-import './index.css'
+import "./index.css";
 
-import { Products } from './routes/products/Products';
-import { loader as ProductsLoader } from './components/Api/products/GetProducts'
-import { NewProduct } from './routes/products/New';
-import { ProductDetails, loader as ProductDetailsLoader } from './routes/products/Product_Detail';
-import Categories from './routes/categories/Cat';
-import { loader as SubLoader, SubCategories } from './routes/categories/Sub';
-import { loader as CategoriesLoader } from './components/Api/categories/GetCategories';
+import { Products } from "./routes/products/Products";
+import { loader as ProductsLoader } from "./components/Api/products/GetProducts";
+import { NewProduct } from "./routes/products/New";
+import {
+  ProductDetails,
+  loader as ProductDetailsLoader,
+} from "./routes/products/Product_Detail";
+import { action as deleteProductAction } from "./components/Api/products/Delproduct";
+import Categories from "./routes/categories/Cat";
+import { loader as SubLoader, SubCategories } from "./routes/categories/Sub";
+import { loader as CategoriesLoader } from "./components/Api/categories/GetCategories";
 
-import Users from './routes/users/Users';
-import { loader as UsersLoader } from './components/Api/users/GetUsers'
-import Order from './routes/orders/Order';
-import { loader as OrderLoader } from './components/Api/orders/orders'
-import Suppliers from './routes/suppliers/Supp';
-import { loader as SuppliersLoader } from './components/Api/suppliers/suppliers'
-import Workers from './routes/employe/Workers';
-import Addresses from './routes/addresses/Addresses';
-import { loader as AddressLoader } from './components/Api/addresses/addresses'
-
-
+import Users from "./routes/users/Users";
+import { loader as UsersLoader } from "./components/Api/users/GetUsers";
+import Order from "./routes/orders/Order";
+import { loader as OrderLoader } from "./components/Api/orders/orders";
+import Suppliers from "./routes/suppliers/Supp";
+import { loader as SuppliersLoader } from "./components/Api/suppliers/suppliers";
+import Workers from "./routes/employe/Workers";
+import Addresses from "./routes/addresses/Addresses";
+import { loader as AddressLoader } from "./components/Api/addresses/addresses";
 
 const router = createBrowserRouter([
-
   {
     path: "/",
     element: <Root />,
@@ -42,22 +43,23 @@ const router = createBrowserRouter([
         path: "/dashboard",
         element: <Dash />,
         errorElement: <ErrorPage />,
-
       },
       {
         path: "/products",
         element: <Products />,
         errorElement: <ErrorPage />,
-        loader: ProductsLoader
+        loader: ProductsLoader,
+      },
+      {
+        path: "/products/:id/delete",
+        action: deleteProductAction ,
       },
       {
         path: "/product/:id",
         element: <ProductDetails />,
         errorElement: <ErrorPage />,
         loader: ProductDetailsLoader,
-
       },
-
 
       {
         path: "/products/new",
@@ -68,8 +70,7 @@ const router = createBrowserRouter([
         path: "categories",
         element: <Categories />,
         errorElement: <ErrorPage />,
-        loader: CategoriesLoader
-
+        loader: CategoriesLoader,
       },
       {
         path: "categories/:id",
@@ -81,32 +82,29 @@ const router = createBrowserRouter([
         path: "users",
         element: <Users />,
         errorElement: <ErrorPage />,
-        loader: UsersLoader
+        loader: UsersLoader,
       },
       {
         path: "orders",
         element: <Order />,
         errorElement: <ErrorPage />,
-        loader: OrderLoader
-
+        loader: OrderLoader,
       },
-
 
       {
         path: "/suppliers",
         element: <Suppliers />,
         errorElement: <ErrorPage />,
-        loader: SuppliersLoader
+        loader: SuppliersLoader,
       },
       {
         path: "/workers",
         element: <Workers />,
         errorElement: <ErrorPage />,
-
       },
 
       {
-        path: '*',
+        path: "*",
         element: <ErrorPage />,
         errorElement: <ErrorPage />,
       },
@@ -116,14 +114,12 @@ const router = createBrowserRouter([
         loader: AddressLoader,
         errorElement: <ErrorPage />,
       },
-
-    ]
-  }
+    ],
+  },
 ]);
 
-
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);

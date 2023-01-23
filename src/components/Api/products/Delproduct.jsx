@@ -1,16 +1,16 @@
-import axios from 'axios';
+import { redirect } from 'react-router-dom';
 
 const baseURL = 'http://127.0.0.1:8000/api';
-export const deleteProduct = async id => {
+export const action = async ({params}) => {
     try {
-        const response = await fetch(`${baseURL}/products/${id}`, {
-            method: 'DELETE',
-            headers: { 'x-access-token': localStorage.getItem('token') },
+        console.log(params.id)
+        const response = await fetch(`${baseURL}/products/${params.id}`, {
+            method: 'DELETE',    
         });
-        const data = await response.json();
-        return { data, status: response.status };
+        return  redirect("/products") ;
     } catch (error) {
         console.log(error);
-        return error;
+        return  redirect("/products") ;
+
     }
 };
