@@ -84,6 +84,8 @@ export const loader = async ({ params }) => {
 };
 
 export const ProductDetails = () => {
+
+
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -103,28 +105,47 @@ export const ProductDetails = () => {
 
   const [product, setProduct] = useState(useLoaderData());
 
-  const handleChange = (e) => {
+  const [name, setName] = useState(useLoaderData().name);
+  const [categoryId, setCategoryId] = useState(useLoaderData().categoryId.name);
+  const [reference, setReference] = useState(useLoaderData().reference);
+  const [price, setPrice] = useState(useLoaderData().price);
+ 
+  const [supplier, setSupplier] = useState(useLoaderData().supplier.name);
+  const [stock, setStock] = useState(Number(useLoaderData().stock));
+
+
+
+  const handleChange = (e, setState) => {
     e.preventDefault();
 
-    setProduct({
-      ...product,
-      [e.target.name]: e.target.value,
-    });
+    setState(e.target.value);
+
+   
   };
 
   const submitForm = (e) => {
     e.preventDefault();
 
+
     console.log("----------------------------------------");
-    console.log(product);
+console.log(supplier);
     console.log("----------------------------------------");
 
-    updateProduct(id, product).then((res) => {
+    updateProduct(id, {
+      name: name,
+      categoryId: categoryId,
+      reference: reference,
+      price: price,
+      supplierId: supplier,
+      stock: Number(stock),
+    }
+  ).then((res) => {
+      
       console.log(res);
       console.log(res.data);
-      redirect("/products");
     });
   };
+
   return (
     <>
       <h1> {product.name}</h1>
@@ -144,13 +165,13 @@ export const ProductDetails = () => {
               name="name"
               required
               value={product.name}
-              onChange={handleChange}
+              onChange={(event) => handleChange(event, setName)}
             />
          
            
             <TextField name="categoryId" defaultValue={product.categoryId.name}   SelectProps={{
             native: true,
-          }} select onChange={handleChange}>
+          }} select onChange={(event) => handleChange(event, setCategoryId)}>
               {categories.map((category) => (
                 <option
                   key={category.id}
@@ -166,13 +187,13 @@ export const ProductDetails = () => {
               type="text"
               name="reference"
               value={product.reference}
-              onChange={handleChange}
+              onChange={(event) => handleChange(event, setReference)}
             />
       
                
-      <TextField name="supplierId"  defaultValue={product.supplierId.name}   SelectProps={{
+      <TextField name="supplierId"  defaultValue={product.supplier.name}   SelectProps={{
             native: true,
-          }} select onChange={handleChange}>
+          }} select onChange={(event) => handleChange(event, setSupplier)}>
               
               {suppliers.map((supplier) => (
                 <option
@@ -189,10 +210,10 @@ export const ProductDetails = () => {
               type="text"
               name="price"
               defaultValue={product.price}
-              onChange={handleChange}
+              onChange={(event) => handleChange(event, setPrice)}
             />
         
-            <TextField  id="outlined-basic" label="Stock" type="number" name="stock" onChange={handleChange}   InputLabelProps={{
+            <TextField  id="outlined-basic" label="Stock" type="number" name="stock" onChange={(event) => handleChange(event, setStock)}   InputLabelProps={{
             shrink: true,
           }}
             defaultValue={product.stock}/>
