@@ -8,7 +8,7 @@ import ErrorPage from "./error-page";
 import Root from "./routes/Root.jsx";
 
 import Dash from "./routes/dashboard/Dash.jsx";
-
+import { loader as SalesLoader } from "./components/Api/charts/sales"
 import "./index.css";
 
 import { Products } from "./routes/products/Products";
@@ -43,8 +43,8 @@ const router = createBrowserRouter([
         path: "/dashboard",
         element: <Dash />,
         errorElement: <ErrorPage />,
-        loader: OrderLoader
-      },
+        loader: SalesLoader
+            },
       {
         path: "/products",
         element: <Products />,

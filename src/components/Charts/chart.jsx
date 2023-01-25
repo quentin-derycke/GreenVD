@@ -12,18 +12,18 @@ export const LineChart = () => {
     setSelectedYear(e.target.value);
   }
   
-  // use selectedYear to filter revenue data by year
-/*   const filteredRevenueData = revenueData.filter((orders) => data.year === selectedYear);
-   */
-  // update chart data with filtered revenue data
-/*   const chartData = {
+
+   
+  
+  const chartData = {
+
     labels: ["January", "February", "March", "April", "May", "June"],
     datasets: [
       {
         label: "My First dataset",
         backgroundColor: "rgb(255, 99, 132)",
         borderColor: "rgb(255, 99, 132)",
-        data: filteredRevenueData,
+        data:
       },
     ],
   };
@@ -37,5 +37,6 @@ export const LineChart = () => {
       </select>
       <Line data={chartData} />
     </div>
-  ); */
+  ); 
 };
+
