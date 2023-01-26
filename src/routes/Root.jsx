@@ -42,6 +42,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 
 import { Container } from '@mui/system';
+import { grey } from '@mui/material/colors';
 
 
 
@@ -193,7 +194,7 @@ export default function MiniDrawer() {
   return (
     <ThemeProvider theme={darkTheme}>
 
-      <Box sx={{ display: 'flex' }}>
+      <Container fixed>
         <CssBaseline />
         <AppBar position="fixed" open={open}>
           <Toolbar>
@@ -215,7 +216,7 @@ export default function MiniDrawer() {
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
-          <DrawerHeader>
+          <DrawerHeader sx={{ bgcolor: grey[900] }}>
             <IconButton onClick={handleDrawerClose}>
               {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
             </IconButton>
@@ -223,7 +224,7 @@ export default function MiniDrawer() {
           <Divider />
 
           {/*Catalogue*/}
-          <List>
+          <List sx={{ bgcolor: grey[900] }}>
             {links.map((link, index) => (
               <NavLink style={{ color: 'white' }} to={link.path} key={"link" + index} className={({ isActive, isPending }) => isActive ? "active" : isPending ? "pending" : ""}>
                 <ListItem disablePadding sx={{ display: 'block' }}>
@@ -250,7 +251,7 @@ export default function MiniDrawer() {
             ))}
           </List>
           <Divider />
-          <List>
+          <List sx={{ bgcolor: grey[900] }}>
             {links2.map((link, index) => (
               <NavLink style={{ color: 'white' }} to={link.path} key={"link" + index} className={({ isActive, isPending }) => isActive ? "active" : isPending ? "pending" : ""}>
                 <ListItem key={index} disablePadding sx={{ display: 'block' }}>
@@ -279,13 +280,22 @@ export default function MiniDrawer() {
         </Drawer>
 
         <DrawerHeader />
-        <Container  fixed>
+        <Box
+
+          justifyContent="center"
+          alignItems="center"
+          minHeight="100vh"
+          sx={{
+
+
+            marginLeft: 10
+          }}>
 
           <Outlet />
-        </Container>
+        </Box>
 
 
-      </Box>
+      </Container>
     </ThemeProvider>
 
   );

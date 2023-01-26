@@ -68,22 +68,24 @@ export const Product = (props) => {
                     {props.item.supplier.name}
                   </Typography>
                 </Grid>
-                <Link to={`/product/${props.item.id}`}>
-                  <Fab color="success" size="small" aria-label="edit">
-                    <EditIcon />
-                  </Fab>
-                </Link>
+                <Grid item>
+                  <Link to={`/product/${props.item.id}`}>
+                    <Fab color="success" size="small" aria-label="edit">
+                      <EditIcon />
+                    </Fab>
+                  </Link>
 
-                <Form
-                  action={`/products/${props.item.id}/delete`}
-                  method="delete"
-                >
-              
-                    <Fab color="error" size="small"  type="submit" aria-label="delete">
+                  <Form
+                    action={`/products/${props.item.id}/delete`}
+                    method="delete"
+                  >
+
+                    <Fab color="error" size="small" type="submit" aria-label="delete">
                       <CancelIcon />
                     </Fab>
-                 
-                </Form>
+
+                  </Form>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
