@@ -279,7 +279,7 @@ export default function MiniDrawer() {
         </Drawer>
 
         <DrawerHeader />
-        <Container fixed>
+        <Container  fixed>
 
           <Outlet />
         </Container>
