@@ -4,7 +4,7 @@ Application Desktop Electron avec React Mui  réalisé dans le cadre de ma forma
 L'application complémentaire de   [Qreen Village](https://quentin.amorce.org)
 
 
-##Stack: 
+## Stack: 
 - [React](https://fr.reactjs.org)
 - [Electron](https://www.electronjs.org)
 - [React Router](https://reactrouter.com/en/main)
